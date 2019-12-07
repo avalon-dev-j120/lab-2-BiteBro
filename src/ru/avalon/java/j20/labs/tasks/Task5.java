@@ -2,8 +2,11 @@ package ru.avalon.java.j20.labs.tasks;
 
 import ru.avalon.java.j20.labs.Task;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
@@ -18,6 +21,16 @@ public class Task5 implements Task {
      */
     @Override
     public void run() throws IOException {
+        ResourceBundle resBundle = read("resources/strings/titles");
+        ResourceBundle resBundleEn = read("resources/strings/titles", new Locale("en"));
+
+        System.out.println(new String(resBundle.getString("menu.tools").getBytes("ISO-8859-1"), "UTF-8"));
+        System.out.println(new String(resBundle.getString("menu.tools.settings").getBytes("ISO-8859-1"), "UTF-8"));
+        System.out.println(new String(resBundle.getString("menu.help.about").getBytes("ISO-8859-1"), "UTF-8"));
+        System.out.println(resBundleEn.getString("menu.tools"));
+        System.out.println(resBundleEn.getString("menu.tools.settings"));
+        System.out.println(resBundleEn.getString("menu.help.about"));
+
         /*
          * TODO(Студент): Выполнить задание №5
          *
@@ -41,7 +54,9 @@ public class Task5 implements Task {
      * @return новый экземпляр типа {@link ResourceBundle}
      */
     private ResourceBundle read(String path) {
-        throw new UnsupportedOperationException("Not implement yet!");
+        ResourceBundle resBundle = ResourceBundle.getBundle(path);
+        return resBundle;
+
     }
 
     /**
@@ -51,6 +66,7 @@ public class Task5 implements Task {
      * @return новый экземпляр типа {@link ResourceBundle}
      */
     private ResourceBundle read(String path, Locale locale) {
-        throw new UnsupportedOperationException("Not implement yet!");
+        ResourceBundle resBundle = ResourceBundle.getBundle(path, locale);
+        return resBundle;
     }
 }

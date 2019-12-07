@@ -3,9 +3,11 @@ package ru.avalon.java.j20.labs.tasks;
 import ru.avalon.java.j20.labs.Task;
 import ru.avalon.java.j20.labs.models.Country;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  * Задание №6
@@ -19,10 +21,9 @@ public class Task6 implements Task {
      * {@inheritDoc}
      */
     @Override
-    public void run() throws IOException {
+    public void run() throws IOException, ParseException {
         File input = new File("assets/countries.txt");
         Collection<Country> countries = read(input);
-
         /*
          * TODO(Студент): Выполнить задание №6
          *
@@ -47,7 +48,14 @@ public class Task6 implements Task {
      * @return коллекция объектов типа {@link Country}
      * @throws IOException в случае ошибки ввода-вывода.
      */
-    private Collection<Country> read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+    private Collection<Country> read(File file) throws IOException, ParseException {
+        try (Reader fr = new FileReader(file); BufferedReader br = new BufferedReader(fr)) {
+            String s;
+            Collection<Country> arrCountry = new LinkedList<>();
+            while ((s = br.readLine()) != null) {
+                arrCountry.add(Country.valueOf(s));
+            }
+            return new ArrayList<>(arrCountry);
+        }
     }
 }

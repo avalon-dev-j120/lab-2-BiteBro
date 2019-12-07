@@ -2,9 +2,10 @@ package ru.avalon.java.j20.labs.tasks;
 
 import ru.avalon.java.j20.labs.Task;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  * Задание №3
@@ -52,7 +53,17 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private Collection<String> read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        String b;
+        try (Reader fr = new FileReader(file); BufferedReader br = new BufferedReader(fr)) {
+            Collection<String> strLine = new LinkedList<>();
+            while ((b = br.readLine()) != null) {
+                strLine.add(b);
+            }
+            return new ArrayList<>(strLine);
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл не найден!\n" + e);
+            return null;
+        }
     }
 
     /**
@@ -61,11 +72,19 @@ public class Task3 implements Task {
      * <p>Каждый элемент коллекции должен быть записан в
      * файл отдельной строкой.
      *
-     * @param file файл
+     * @param file       файл
      * @param collection коллекция строк
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, Collection<String> collection) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        try (PrintWriter pw = new PrintWriter(file)) {
+            for (String s : collection) {
+                pw.write(s + System.lineSeparator());
+                //System.out.println(s);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Создан пустой файл!\n" + e);
+        }
+
     }
 }

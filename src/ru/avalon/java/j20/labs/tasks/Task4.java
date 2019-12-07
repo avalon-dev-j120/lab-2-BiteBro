@@ -2,7 +2,7 @@ package ru.avalon.java.j20.labs.tasks;
 
 import ru.avalon.java.j20.labs.Task;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -10,14 +10,18 @@ import java.util.Properties;
  *
  * <p>Тема: "Потоковый ввод-вывод. Чтение файлов конфигурации".
  */
-public class Task4 implements Task {
 
+public class Task4 implements Task {
     /**
      * {@inheritDoc}
      */
     @Override
     public void run() throws IOException {
-        Properties properties = read("resources/database");
+        Properties properties = read("C:\\Users\\Алексей\\IdeaProjects\\lab-2-BiteBro\\src\\resources\\database.properties");
+
+        System.out.println(properties.getProperty("db.mysql.driver.class"));
+        System.out.println(properties.getProperty("db.postgres.driver.class"));
+        System.out.println(properties.getProperty("db.oracle.driver.class"));
 
         /*
          * TODO(Студент): Выполнить задание №4
@@ -36,6 +40,14 @@ public class Task4 implements Task {
      * @return новый экземпляр типа {@link Properties}
      */
     private Properties read(String path) {
-        throw new UnsupportedOperationException("Not implement yet!");
+        Properties properties = new Properties();
+        try (FileInputStream fis = new FileInputStream(path)) {
+            properties.load(fis);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return properties;
     }
 }

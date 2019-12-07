@@ -2,9 +2,10 @@ package ru.avalon.java.j20.labs;
 
 import ru.avalon.java.j20.labs.tasks.*;
 
+
 /**
  * Лабораторная работа №2
- *
+ * <p>
  * по курсу: "DEV-J20. Программирование на платформе Java.
  * Стандартные пакеты"
  */
@@ -37,6 +38,22 @@ public class Application {
          * порядок и/или закомментировать любой из элементов
          * массива.
          */
-        for (Task task : tasks) task.run();
+
+        tasks[0].run();
+        tasks[1].run();
+        tasks[2].run();
+
+        System.out.println("Task 4: ");
+        tasks[3].run();
+        System.out.println("**********************************");
+
+        System.out.println("Task 5: ");
+        tasks[4].run();
+        System.out.println("**********************************");
+
+        System.out.println("Task 6: ");
+        tasks[5].run();
+        System.out.println("**********************************");
+        //for (Task task : tasks) task.run();
     }
 }
